@@ -20,4 +20,16 @@ public class AssetTagItem extends TagItem {
         return this.assetName;
     }
 
+    @Override
+    public String getName() {
+        int position = this.getAssetName().indexOf("."); // die Position, bei der ein Punkt im String gefunden wurde
+        String substring ="";
+       if(position!=-1){
+          substring = this.getAssetName().substring(0,position);
+       }
+       else{
+           substring = this.getAssetName();
+       }
+       return substring;
+    }
 }

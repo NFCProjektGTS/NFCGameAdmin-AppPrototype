@@ -19,4 +19,12 @@ public abstract class TagItem {
     public TagDataKind getDataKind(){
         return this.dataKind;
     }
+
+    @Override
+    public String toString() {
+        return (this.getDataKind().name()+"/"+ getName());
+    }
+
+    public abstract String getName();
+
 }

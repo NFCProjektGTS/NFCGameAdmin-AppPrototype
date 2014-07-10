@@ -13,4 +13,9 @@ public class LinkTagItem extends TagItem {
   public String getAddress(){
       return address;
   }
+
+    @Override
+    public String getName() {
+        return this.getAddress();
+    }
 }
