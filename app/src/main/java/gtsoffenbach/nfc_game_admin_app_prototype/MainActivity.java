@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private TagItemMagazine tagItemMagazine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,12 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        this.tagItemMagazine = new TagItemMagazine();
+    }
+
+    public TagItemMagazine getTagItemMagazine(){
+        return this.tagItemMagazine;
     }
 
     @Override
@@ -49,7 +56,7 @@ public class MainActivity extends ActionBarActivity
         switch (position){
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, FragmentWrite.newInstance(position + 1))
+                        .replace(R.id.container, FragmentOverview.newInstance(position + 1))
                         .commit();
                 break;
         }
