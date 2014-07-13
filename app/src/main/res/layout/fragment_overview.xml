@@ -13,18 +13,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AusgewähltesTagItem"
-        android:id="@+id/textView"
+        android:id="@+id/textView_SelectTagItem"
         android:layout_gravity="center_horizontal"
         android:background="#fd141814"
         android:textColor="#ffffffff"
-        android:textSize="30dp" />
+        android:textSize="20dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Vorschau Zeigen"
-        android:id="@+id/buttonVorschau"
+        android:id="@+id/button_Vorschau"
         android:layout_gravity="center_horizontal"
         android:longClickable="true"
         android:clickable="true" />
