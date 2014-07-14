@@ -20,6 +20,14 @@ public abstract class TagItem {
         return this.dataKind;
     }
 
+
+
+    /*
+    diese überschriebene Methode toString wird in der Klasse FragmentOverview aufgerufen.
+    Die Methode soll den Text erstellen, welcher anschließend im TextView_SelectTagItem angezeigt wird.
+    Der Name setzt sich zusammen aus dem datKind und dem Namen des TagItem.
+    Um den Namen des TagItem zu bekommen, wird die Methode getName aufgerufen.
+     */
     @Override
     public String toString() {
         return (this.getDataKind().name()+"/"+ getName());

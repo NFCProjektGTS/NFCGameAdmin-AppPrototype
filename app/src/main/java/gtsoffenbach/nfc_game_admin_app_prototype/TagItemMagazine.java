@@ -11,12 +11,14 @@ import java.util.ArrayList;
  * Diese Klasse verwaltet alle zur Verfügung stehenden tagItems
  * Es darf nur ein Objekt dieser Klasse geben
  */
-
-
 public class TagItemMagazine {
 
     ArrayList<TagItem> tagItems;
 
+    /*
+    im Konstruktor werden aus allen Assets TagItems erstellt und der ArrayList vom Typen <TagItem> hinzugefügt.
+    Wenn Links vorhanden sind, würden in diesem Konstruktor auch LinkTagItems erstellt werden und der tagItem_ArrayList hinzugefügt werden.
+     */
     public TagItemMagazine(){
         tagItems = new ArrayList<TagItem>();
 
@@ -59,6 +61,11 @@ public class TagItemMagazine {
         tagItems.add(tagItem);
 
     }
+
+    /*
+    diese Methode erstellt ein neues Array in dem alle TagItems gespeichert werden
+    dieses Array wird dann zurückgegeben.
+     */
     public TagItem[] getAllTagItems(){
         TagItem[] allTagItems = new TagItem[tagItems.size()];
         for(int i =0;i<(tagItems.size());i++){

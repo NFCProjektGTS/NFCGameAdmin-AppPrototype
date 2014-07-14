@@ -16,10 +16,17 @@ public class AssetTagItem extends TagItem {
         this.assetName = assetName;
     }
 
+    /*
+    Dateiname, der im Assetordner steht, wird in dieser Methode zurückgegeben
+     */
     public String getAssetName(){
         return this.assetName;
     }
 
+
+    /*
+    Dateiname wird ohne Dateiendung zurückgegeben
+     */
     @Override
     public String getName() {
         int position = this.getAssetName().indexOf("."); // die Position, bei der ein Punkt im String gefunden wurde
@@ -31,5 +38,21 @@ public class AssetTagItem extends TagItem {
            substring = this.getAssetName();
        }
        return substring;
+    }
+
+
+    /*
+    liefert den Pfad relativ zum Assetordner
+     */
+    public String getAssetPath(){
+        if(this.getDataKind()==TagDataKind.Picture){
+            return ("pictures/"+this.getAssetName());
+        }
+        if(this.getDataKind()==TagDataKind.Sound){
+            return ( "sounds/"+this.getAssetName());
+        }
+        else{
+            return "";
+        }
     }
 }
