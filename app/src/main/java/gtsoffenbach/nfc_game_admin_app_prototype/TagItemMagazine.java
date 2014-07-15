@@ -52,6 +52,9 @@ public class TagItemMagazine {
         AssetTagItem tagItemMatch = new AssetTagItem("Match.mp3",TagDataKind.Sound);
         tagItems.add(tagItemMatch);
 
+        AssetTagItem tagItemSmellsLikeTeenSpirit = new AssetTagItem("Smells Like Teen Spirit.mp3",TagDataKind.Sound);
+        tagItems.add(tagItemSmellsLikeTeenSpirit);
+
     }
 
 
