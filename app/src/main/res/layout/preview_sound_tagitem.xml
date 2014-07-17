@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:layout_above="@+id/imageButton_play"
+        android:layout_marginTop="148dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="69dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/imageButton_play"
         android:src="@drawable/play_icon_klein"
         android:background="#ffffffff"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="67dp"
         android:layout_above="@+id/button_VorschauSchließen"
         android:layout_alignLeft="@+id/button_VorschauSchließen"
         android:layout_alignStart="@+id/button_VorschauSchließen" />
