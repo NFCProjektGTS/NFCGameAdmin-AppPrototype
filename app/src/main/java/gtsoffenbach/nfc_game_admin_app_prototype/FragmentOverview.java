@@ -71,9 +71,10 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View view) {
-
-            caller = this.getActivity();
-            PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(caller, AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
+            if(selectedTagItem!=null){
+                caller = this.getActivity();
+                PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(caller, AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
+            }
 
 
     }
