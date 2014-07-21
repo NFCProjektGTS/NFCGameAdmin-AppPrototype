@@ -1,6 +1,7 @@
 package gtsoffenbach.nfc_game_admin_app_prototype;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,20 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
+    public static NFCFramework framework;
     private CharSequence mTitle;
     private TagItemMagazine tagItemMagazine;
-
+    public static AlertDialogAnimation dialogAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +38,7 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         this.tagItemMagazine = new TagItemMagazine();
+        framework = new NFCFramework(this);
     }
 
     public TagItemMagazine getTagItemMagazine(){
@@ -109,7 +105,34 @@ public class MainActivity extends ActionBarActivity
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (framework != null) {
+            if (framework.checkNFC()) {
+                framework.uninstallService();
+            }
+        }
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (framework != null) {
+            framework.resolveIntent(getIntent());
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setIntent(new Intent());
 
+        if (framework != null) {
+            if (framework.checkNFC()) {
+                framework.installService();
+            }
+        }
+    }
 
 
 }
