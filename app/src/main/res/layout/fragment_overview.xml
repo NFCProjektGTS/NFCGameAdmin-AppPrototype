@@ -2,29 +2,20 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="183dp"
+        android:layout_height="400dp"
         android:id="@+id/listView_TagItems"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView_SelectTagItem"
-        android:layout_gravity="center_horizontal"
-        android:background="#fd141814"
-        android:textColor="#ffffffff"
-        android:textSize="20dp" />
-
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="149dp"
         android:layout_height="wrap_content"
-        android:text="Vorschau Zeigen"
-        android:id="@+id/button_Vorschau"
-        android:layout_gravity="center_horizontal"
-        android:longClickable="true"
-        android:clickable="true" />
+        android:text="Schreibe"
+        android:id="@+id/button"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

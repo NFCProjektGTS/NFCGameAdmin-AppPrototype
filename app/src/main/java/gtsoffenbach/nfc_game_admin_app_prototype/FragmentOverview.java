@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by Marlon on 08.07.2014.
  */
@@ -49,10 +51,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
         listViewTagItems.setOnItemClickListener(this);
         this.fillTagItemListView();
 
-        textViewSelectTagItem = (TextView) rootView.findViewById(R.id.textView_SelectTagItem);
-        ButtonPreview = (Button) rootView.findViewById(R.id.button_Vorschau);
-        ButtonPreview.setOnClickListener(this);
-        ButtonVorschauSchließen = (Button) rootView.findViewById((R.id.button_VorschauSchließen));
+
 
 
 
@@ -72,8 +71,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View view) {
             if(selectedTagItem!=null){
-                caller = this.getActivity();
-                PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(caller, AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
+
             }
 
 
@@ -81,19 +79,23 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-       this.selectedTagItem = ((TagItem) listViewTagItems.getItemAtPosition(position));
-       String tagItemName ="";
-       tagItemName = selectedTagItem.toString();
+       this.selectedTagItem = tagItemMagazine.getItemAt(position);
 
-      //char[] text= tagItemName.toCharArray();
+        caller = this.getActivity();
+        PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(caller, AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
 
-       textViewSelectTagItem.setText("Ausgewähltes TagItem: " + tagItemName);
+
+       //textViewSelectTagItem.setText("Ausgewähltes TagItem: " + selectedTagItem.getName());
 
     }
 
 
     private void fillTagItemListView(){
-        ArrayAdapter<TagItem> listAdapter = new ArrayAdapter<TagItem>(getActivity(), R.layout.tagitemlist_item, this.tagItemMagazine.getAllTagItems());
+        ArrayList tagNames = new ArrayList<String>();
+        for(int i = 0; i<tagItemMagazine.getAllTagItems().size();i++){
+            tagNames.add(i,"  "+tagItemMagazine.getAllTagItems().get(i).getID()+" "+tagItemMagazine.getAllTagItems().get(i).getName());
+        }
+        ArrayAdapter<TagItem> listAdapter = new ArrayAdapter<TagItem>(getActivity(), R.layout.tagitemlist_item, tagNames);
         this.listViewTagItems.setAdapter(listAdapter);
     }
 }
