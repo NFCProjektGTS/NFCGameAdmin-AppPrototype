@@ -2,6 +2,7 @@ package gtsoffenbach.nfc_game_admin_app_prototype;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,9 +25,6 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private TagItemMagazine tagItemMagazine;
     private ListView listViewTagItems;
-    private TextView textViewSelectTagItem;
-    private Button ButtonPreview;
-    private Button ButtonVorschauSchließen;
     private Activity caller;
     private TagItem selectedTagItem = null;
 
@@ -62,14 +60,14 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(ARG_SECTION_NUMBER));
+
 
         this.tagItemMagazine = ((MainActivity) activity).getTagItemMagazine();
     }
 
     @Override
     public void onClick(View view) {
+
             if(selectedTagItem!=null){
 
             }

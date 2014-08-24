@@ -2,6 +2,7 @@ package gtsoffenbach.nfc_game_admin_app_prototype;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -26,7 +27,7 @@ import java.io.InputStream;
  * Ebenso überprüft die Klasse ob das SelectedTagItem ein Objekt der Klasse AssetTagItem oder der Klasse LinkTagItem ist.
  * Diese überprüfungen sind notwendig, um richtig mit dem SelectedTagItem agieren zu können.
  */
-public class PreviewTagItemDialog extends AlertDialog implements View.OnClickListener {
+public class PreviewTagItemDialog  implements View.OnClickListener {
 
     private View view;
     private ImageView bildvorschau;
@@ -35,23 +36,30 @@ public class PreviewTagItemDialog extends AlertDialog implements View.OnClickLis
     private Activity caller;
     private Button ButtonSchließen;
 
-    public PreviewTagItemDialog(Activity caller, int THEME, TagItem selectedTagItem) {
-        super(caller, THEME);
+    public PreviewTagItemDialog(Activity caller, int THEME, final TagItem selectedTagItem) {
+
         this.caller = caller;
         this.selectedTagItem = selectedTagItem;
         this.inflater = (LayoutInflater) caller.getSystemService(caller.LAYOUT_INFLATER_SERVICE);
         this.scanSelectedTagItem();
 
 
-        setTitle(selectedTagItem.getName());
-        setMessage("ID: "+selectedTagItem.getID()+System.getProperty("line.separator")+selectedTagItem.getBeschreibung());
-        //setButton(R.id.);
-        setView(view);
 
-        setCancelable(true);
-        show();
-
-
+        final AlertDialog.Builder builder = new AlertDialog.Builder(caller);
+        builder.setTitle(selectedTagItem.getName());
+        builder.setMessage("ID: " + selectedTagItem.getID() + System.getProperty("line.separator") + selectedTagItem.getBeschreibung());
+        builder.setPositiveButton("Schreiben", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+               //TODO WRITE ON NFC TAG MainActivity.framework.writeTag(,selectedTagItem.getID());
+            }
+        });
+        builder.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+               dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     /*
@@ -76,19 +84,10 @@ public class PreviewTagItemDialog extends AlertDialog implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.button_VorschauSchließen:
-               this.closePreviewDialog();
-                break;
 
-        }
     }
 
 
 
 
-    public void closePreviewDialog() {
-
-        this.dismiss();
-    }
 }
