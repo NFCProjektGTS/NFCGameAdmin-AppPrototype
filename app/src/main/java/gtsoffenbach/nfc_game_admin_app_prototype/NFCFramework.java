@@ -19,6 +19,7 @@ import android.os.Parcelable;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 
 /**
  * Created by Kern on 21.07.2014.
@@ -94,7 +95,6 @@ import java.math.BigInteger;
         public void resolveIntent(Intent intent) {
             String action = intent.getAction();
             if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
-                    || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
                     || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
 
                 Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
@@ -287,6 +287,39 @@ import java.math.BigInteger;
         }
 
 
+
+    public static NdefMessage NdefFromId(int id) {
+        try {
+            final BigInteger bi = BigInteger.valueOf(id);
+            final byte[] opc = bi.toByteArray();
+            NdefRecord record = new NdefRecord(
+                    NdefRecord.TNF_WELL_KNOWN, opc, new byte[0], new byte[0]);
+            NdefRecord[] records = new NdefRecord[]{record};
+            return new NdefMessage(records);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmptyNdef();
+    }
+    public static NdefMessage NdefFromApp(String appname) {
+        try {
+            NdefRecord record = new NdefRecord(
+                    NdefRecord.TNF_MIME_MEDIA,
+                    new String("application/" + appname).getBytes(Charset.forName("US-ASCII")),
+                    new byte[0], "Android is so cool".getBytes(Charset.forName("US-ASCII")));
+            NdefRecord[] records = new NdefRecord[]{record};
+            return new NdefMessage(records);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getEmptyNdef();
+    }
+    public static final NdefMessage getEmptyNdef() {
+        byte[] empty = new byte[0];
+        NdefRecord[] records = new NdefRecord[1];
+        records[0] = new NdefRecord(NdefRecord.TNF_WELL_KNOWN, empty, empty, empty);
+        return new NdefMessage(records);
+    }
 
 
         public void createWriteNdef(NdefMessage message) {

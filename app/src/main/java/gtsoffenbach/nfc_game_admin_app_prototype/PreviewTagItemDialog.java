@@ -3,20 +3,12 @@ package gtsoffenbach.nfc_game_admin_app_prototype;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.res.AssetFileDescriptor;
-import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
-import android.os.Message;
+import android.nfc.NdefMessage;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by Marlon on 13.07.2014.
@@ -51,6 +43,12 @@ public class PreviewTagItemDialog  implements View.OnClickListener {
         builder.setPositiveButton("Schreiben", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
+                if(selectedTagItem.getID()==1){
+                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromApp(selectedTagItem.getBeschreibung()));
+                }else {
+                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromId(selectedTagItem.getID()));
+                }
+                MainActivity.framework.enableWrite();
                //TODO WRITE ON NFC TAG MainActivity.framework.writeTag(,selectedTagItem.getID());
             }
         });
