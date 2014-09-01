@@ -304,11 +304,13 @@ import java.nio.charset.Charset;
     public static NdefMessage NdefFromApp(String appname) {
         try {
             NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_MIME_MEDIA,
-                    new String("application/" + appname).getBytes(Charset.forName("US-ASCII")),
+                    NdefRecord.TNF_EXTERNAL_TYPE,
+                    new String(appname).getBytes(Charset.forName("US-ASCII")),
                     new byte[0], "Android is so cool".getBytes(Charset.forName("US-ASCII")));
-            NdefRecord[] records = new NdefRecord[]{record};
-            return new NdefMessage(records);
+            ;
+            NdefMessage msg = new NdefMessage(
+                    new NdefRecord[] { record, NdefRecord.createApplicationRecord(appname) });
+            return msg;
         } catch (Exception e) {
             e.printStackTrace();
         }
