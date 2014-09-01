@@ -13,14 +13,18 @@
         android:id="@+id/textView"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:background="#ff4a4a4a"
+        android:textColor="#ffffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ID  ||   Name"
+        android:text="ID     |   Name"
         android:id="@+id/textView2"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:background="#ff4a4a4a"
+        android:textColor="#ffffffff" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -28,7 +32,12 @@
         android:id="@+id/listView_TagItems"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:background="#ff4a4a4a"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:textFilterEnabled="false" />
 
 
 

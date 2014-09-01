@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by Marlon on 08.07.2014.
  */
-public class FragmentOverview extends Fragment implements View.OnClickListener, ListView.OnItemClickListener {
+public class FragmentOverview extends Fragment implements  ListView.OnItemClickListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private TagItemMagazine tagItemMagazine;
     private ListView listViewTagItems;
@@ -65,15 +65,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
         this.tagItemMagazine = ((MainActivity) activity).getTagItemMagazine();
     }
 
-    @Override
-    public void onClick(View view) {
 
-            if(selectedTagItem!=null){
-
-            }
-
-
-    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -91,7 +83,7 @@ public class FragmentOverview extends Fragment implements View.OnClickListener, 
     private void fillTagItemListView(){
         ArrayList tagNames = new ArrayList<String>();
         for(int i = 0; i<tagItemMagazine.getAllTagItems().size();i++){
-            tagNames.add(i,"  "+tagItemMagazine.getAllTagItems().get(i).getID()+" "+tagItemMagazine.getAllTagItems().get(i).getName());
+            tagNames.add(i,"  "+tagItemMagazine.getAllTagItems().get(i).getID()+" | "+tagItemMagazine.getAllTagItems().get(i).getName());
         }
         ArrayAdapter<TagItem> listAdapter = new ArrayAdapter<TagItem>(getActivity(), R.layout.tagitemlist_item, tagNames);
         this.listViewTagItems.setAdapter(listAdapter);
