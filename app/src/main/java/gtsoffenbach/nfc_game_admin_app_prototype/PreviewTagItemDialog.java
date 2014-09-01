@@ -28,7 +28,7 @@ public class PreviewTagItemDialog  implements View.OnClickListener {
     private Activity caller;
     private Button ButtonSchließen;
 
-    public PreviewTagItemDialog(Activity caller, int THEME, final TagItem selectedTagItem) {
+    public PreviewTagItemDialog(Activity caller, int THEME, final TagItem selectedTagItem, final nfcManager nfcManager) {
 
         this.caller = caller;
         this.selectedTagItem = selectedTagItem;
@@ -43,13 +43,8 @@ public class PreviewTagItemDialog  implements View.OnClickListener {
         builder.setPositiveButton("Schreiben", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-                if(selectedTagItem.getID()==1){
-                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromApp(selectedTagItem.getBeschreibung()));
-                }else {
-                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromId(selectedTagItem.getID()));
-                }
-                MainActivity.framework.enableWrite();
-               //TODO WRITE ON NFC TAG MainActivity.framework.writeTag(,selectedTagItem.getID());
+                nfcManager.write(selectedTagItem);
+
             }
         });
         builder.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {

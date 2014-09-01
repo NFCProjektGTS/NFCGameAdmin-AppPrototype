@@ -19,10 +19,23 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    public static NFCFramework framework;
+    public interface ActivityLifeCycleListener{
+        public void onActivityResume();
+        public void onActivityPause();
+        public void onActivityNewIntent(Intent intent);
+
+    }
+
+    private ActivityLifeCycleListener activityLifeCycleListener = null;
+
+
+    
+   // public static NFCFramework framework;
+    private nfcManager nfcManager;
     private CharSequence mTitle;
     private TagItemMagazine tagItemMagazine;
     public static AlertDialogAnimation dialogAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +49,19 @@ public class MainActivity extends ActionBarActivity {
 
 
         this.tagItemMagazine = new TagItemMagazine();
-        framework = new NFCFramework(this);
+       // framework = new NFCFramework(this);
+        nfcManager = new nfcManager(this);
     }
 
     public TagItemMagazine getTagItemMagazine(){
         return this.tagItemMagazine;
     }
 
+    public nfcManager getNfcManager(){
+        return this.nfcManager;
+    }
+
+   
 
 
 
@@ -53,6 +72,11 @@ public class MainActivity extends ActionBarActivity {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
+
+    public void setActivityLifeCycleListener(ActivityLifeCycleListener value){
+        this.activityLifeCycleListener = value;
+    }
+
 
 
     @Override
@@ -76,18 +100,26 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (framework != null) {
+       /* if (framework != null) {
             if (framework.checkNFC()) {
                 framework.uninstallService();
             }
+        }*/
+
+        if(this.activityLifeCycleListener!=null){
+            this.activityLifeCycleListener.onActivityPause();
         }
     }
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        if (framework != null) {
+        /*if (framework != null) {
             framework.resolveIntent(getIntent());
+        }*/
+
+        if(this.activityLifeCycleListener!=null){
+            this.activityLifeCycleListener.onActivityNewIntent(intent);
         }
     }
     @Override
@@ -95,10 +127,14 @@ public class MainActivity extends ActionBarActivity {
         super.onResume();
         setIntent(new Intent());
 
-        if (framework != null) {
+       /* if (framework != null) {
             if (framework.checkNFC()) {
                 framework.installService();
             }
+        } */
+
+        if(this.activityLifeCycleListener!=null){
+            this.activityLifeCycleListener.onActivityResume();
         }
     }
 

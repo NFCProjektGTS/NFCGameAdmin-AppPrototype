@@ -21,12 +21,14 @@ import java.util.ArrayList;
 /**
  * Created by Marlon on 08.07.2014.
  */
-public class FragmentOverview extends Fragment implements  ListView.OnItemClickListener {
+public class FragmentOverview extends Fragment implements  ListView.OnItemClickListener, nfcManager.StatusChangeListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private TagItemMagazine tagItemMagazine;
     private ListView listViewTagItems;
-    private Activity caller;
     private TagItem selectedTagItem = null;
+
+    private nfcManager nfcManager = null;
+
 
     public FragmentOverview() {
     }
@@ -50,8 +52,8 @@ public class FragmentOverview extends Fragment implements  ListView.OnItemClickL
         this.fillTagItemListView();
 
 
-
-
+        this.nfcManager = ((MainActivity) this.getActivity()).getNfcManager();
+        nfcManager.setStatusChangedListener(this);
 
         return rootView;
     }
@@ -60,32 +62,43 @@ public class FragmentOverview extends Fragment implements  ListView.OnItemClickL
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-
-
         this.tagItemMagazine = ((MainActivity) activity).getTagItemMagazine();
     }
 
-
-
+   
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-       this.selectedTagItem = tagItemMagazine.getItemAt(position);
+        this.selectedTagItem = ((TagItem) listViewTagItems.getItemAtPosition(position));
 
-        caller = this.getActivity();
-        PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(caller, AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
-
-
-       //textViewSelectTagItem.setText("Ausgewähltes TagItem: " + selectedTagItem.getName());
+        PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(this.getActivity(), AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem,this.nfcManager);
 
     }
 
 
-    private void fillTagItemListView(){
-        ArrayList tagNames = new ArrayList<String>();
-        for(int i = 0; i<tagItemMagazine.getAllTagItems().size();i++){
-            tagNames.add(i,"  "+tagItemMagazine.getAllTagItems().get(i).getID()+" | "+tagItemMagazine.getAllTagItems().get(i).getName());
-        }
-        ArrayAdapter<TagItem> listAdapter = new ArrayAdapter<TagItem>(getActivity(), R.layout.tagitemlist_item, tagNames);
+    private void fillTagItemListView() {
+        ArrayAdapter<TagItem> listAdapter = new ArrayAdapter<TagItem>(getActivity(), R.layout.tagitemlist_item, this.tagItemMagazine.getAllTagItems());
         this.listViewTagItems.setAdapter(listAdapter);
+    }
+
+
+    @Override
+    public void onStatusChanged(nfcManager.Status newStatus) {
+       
+
+        if(newStatus == gtsoffenbach.nfc_game_admin_app_prototype.nfcManager.Status.bereit_zum_schreiben){
+            try{
+                MainActivity.dialogAnimation = new AlertDialogAnimation(this.getActivity(), AlertDialog.THEME_HOLO_LIGHT);
+                MainActivity.dialogAnimation.loadNFCAnimation();
+                MainActivity.dialogAnimation.startAnimation();
+            }catch(Exception e){
+                System.out.println(e.getCause());
+            }
+
+        }
+        if(newStatus == gtsoffenbach.nfc_game_admin_app_prototype.nfcManager.Status.ready){
+            if(MainActivity.dialogAnimation!=null){
+                MainActivity.dialogAnimation.closeDialog();
+            }
+        }
     }
 }

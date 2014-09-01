@@ -1,7 +1,5 @@
 package gtsoffenbach.nfc_game_admin_app_prototype;
 
-import android.nfc.Tag;
-
 import java.util.ArrayList;
 
 /**
@@ -22,7 +20,7 @@ public class TagItemMagazine {
         tagItems = new ArrayList<TagItem>();
 
 
-        tagItems.add(new LinkTagItem("Start Tag","gtsoffenbach.nfcgamespieler_appprototype‏","Dies ist der Start Tag."));
+        tagItems.add(new StartTagItem("Start Tag","Dies ist der Start Tag‏"));
         tagItems.add(new TagItem("Test01 Tag","Dies ist ein Test Tag."));
         tagItems.add(new TagItem("Test02 Tag","Dies ist ein Test Tag."));
         tagItems.add(new TagItem("Test03 Tag","Dies ist ein Test Tag."));
