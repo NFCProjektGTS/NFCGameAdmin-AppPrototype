@@ -20,12 +20,12 @@ public class StartTagItem extends TagItem {
 
     @Override
     public short getNfcTnf() {
-        return NdefRecord.TNF_MIME_MEDIA;
+        return NdefRecord.TNF_EXTERNAL_TYPE;
     }
 
     @Override
     public byte[] getNfcType() {
-        return "application/gtsoffenbach.nfcgamespieler_appprototype".getBytes(Charset.forName("US-ASCII"));
+        return "gtsoffenbach.nfcgamespieler_appprototype".getBytes(Charset.forName("US-ASCII"));
     }
 
     @Override
