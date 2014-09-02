@@ -70,7 +70,7 @@ public class FragmentOverview extends Fragment implements  ListView.OnItemClickL
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         this.selectedTagItem = ((TagItem) listViewTagItems.getItemAtPosition(position));
 
-        PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(this.getActivity(), AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem,this.nfcManager);
+        PreviewTagItemDialog previewTagItemDialog = new PreviewTagItemDialog(this.getActivity(), AlertDialog.THEME_HOLO_LIGHT,this.selectedTagItem);
 
     }
 

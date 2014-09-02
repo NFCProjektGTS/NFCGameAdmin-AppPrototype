@@ -20,6 +20,7 @@ public class TagItem  {
     private int ID;
     private String beschreibung;
     static int counter = 0;
+    private short type = 0;
 
 
 
@@ -47,13 +48,14 @@ public class TagItem  {
         return bi.toByteArray();
     }
 
-    public byte[] getNfcPayload(){
-        return null;
-    }
+
 
 
     @Override
     public String toString() {
         return "  "+getID()+" | "+getName();
+    }
+    public short getType(){
+        return type;
     }
 }

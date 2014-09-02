@@ -235,10 +235,26 @@ public class nfcManager implements MainActivity.ActivityLifeCycleListener {
 
     private NdefMessage createNdefMessage(){
         try {
+        if(tagItem.getType()==1){
+
+
+           String appname = ((StartTagItem) tagItem).getAddress();
+           NdefMessage msg;
+           NdefRecord rec = NdefRecord.createApplicationRecord(appname);
+           msg = new NdefMessage(rec);
+           System.out.println(appname);
+           return msg;
+
+
+
+        }else {
+
+
             NdefRecord record = new NdefRecord(
-                    this.tagItem.getNfcTnf(),this.tagItem.getNfcType(), new byte[0], this.tagItem.getNfcPayload());
+                    this.tagItem.getNfcTnf(), this.tagItem.getNfcType(), new byte[0], null);
             NdefRecord[] records = new NdefRecord[]{record};
             return new NdefMessage(records);
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }

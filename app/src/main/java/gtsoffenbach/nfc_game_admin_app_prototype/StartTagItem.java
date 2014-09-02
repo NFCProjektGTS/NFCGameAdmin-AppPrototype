@@ -9,27 +9,18 @@ import java.nio.charset.Charset;
  */
 public class StartTagItem extends TagItem {
     private String address;
+    private short type = 1;
 
-    public StartTagItem(String name, String beschreibung) {
+    public StartTagItem(String name, String beschreibung,String address) {
         super(name, beschreibung);
-
+        this.address = address;
     }
-
-
-
-
+    public String getAddress(){
+        return address;
+    }
     @Override
-    public short getNfcTnf() {
-        return NdefRecord.TNF_EXTERNAL_TYPE;
+    public short getType(){
+        return type;
     }
 
-    @Override
-    public byte[] getNfcType() {
-        return "gtsoffenbach.nfcgamespieler_appprototype".getBytes(Charset.forName("US-ASCII"));
-    }
-
-    @Override
-    public byte[] getNfcPayload() {
-        return "Android is cool".getBytes(Charset.forName("US-ASCII"));
-    }
 }
