@@ -303,13 +303,10 @@ import java.nio.charset.Charset;
     }
     public static NdefMessage NdefFromApp(String appname) {
         try {
-            NdefRecord record = new NdefRecord(
-                    NdefRecord.TNF_EXTERNAL_TYPE,
-                    new String(appname).getBytes(Charset.forName("US-ASCII")),
-                    new byte[0], "Android is so cool".getBytes(Charset.forName("US-ASCII")));
-            ;
-            NdefMessage msg = new NdefMessage(
-                    new NdefRecord[] { record, NdefRecord.createApplicationRecord(appname) });
+            NdefMessage msg;
+            NdefRecord rec = NdefRecord.createApplicationRecord(appname);
+            msg = new NdefMessage(rec);
+            System.out.println(appname);
             return msg;
         } catch (Exception e) {
             e.printStackTrace();

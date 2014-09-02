@@ -44,12 +44,11 @@ public class PreviewTagItemDialog  implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
                 if(selectedTagItem.getID()==1){
-                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromApp(selectedTagItem.getBeschreibung()));
+                    MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromApp(((LinkTagItem) selectedTagItem).getAddress()));
                 }else {
                     MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromId(selectedTagItem.getID()));
                 }
                 MainActivity.framework.enableWrite();
-               //TODO WRITE ON NFC TAG MainActivity.framework.writeTag(,selectedTagItem.getID());
             }
         });
         builder.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {
