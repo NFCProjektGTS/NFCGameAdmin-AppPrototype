@@ -49,6 +49,8 @@ public class PreviewTagItemDialog  implements View.OnClickListener {
                     MainActivity.framework.createWriteNdef(new MainActivity().framework.NdefFromId(selectedTagItem.getID()));
                 }
                 MainActivity.framework.enableWrite();
+                nfcManager.write(selectedTagItem);
+
             }
         });
         builder.setNegativeButton("Schließen", new DialogInterface.OnClickListener() {

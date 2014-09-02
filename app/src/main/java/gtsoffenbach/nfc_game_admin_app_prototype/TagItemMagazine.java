@@ -23,6 +23,7 @@ public class TagItemMagazine {
 
 
         tagItems.add(new LinkTagItem("Start Tag","Dies ist der Start Tag","gtsoffenbach.nfcgamespieler_appprototype"));
+        tagItems.add(new StartTagItem("Start Tag","Dies ist der Start Tag‏"));
         tagItems.add(new TagItem("Test01 Tag","Dies ist ein Test Tag."));
         tagItems.add(new TagItem("Test02 Tag","Dies ist ein Test Tag."));
         tagItems.add(new TagItem("Test03 Tag","Dies ist ein Test Tag."));
