@@ -12,8 +12,9 @@ public class TagItem  {
     public TagItem(String name,String beschreibung){
         this.name = name;
         this.beschreibung = beschreibung;
-        counter+=1;
+
         this.ID = counter;
+        counter+=1;
     }
 
     private String name;
